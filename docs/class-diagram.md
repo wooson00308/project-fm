@@ -13,7 +13,7 @@
 
 이 문서에서는 클래스 다이어그램을 표현하기 위해 Mermaid 문법을 사용합니다:
 
-```
+```mermaid
 classDiagram
     Class01 <|-- AveryLongClass : 상속/구현
     Class03 *-- Class04 : 합성
