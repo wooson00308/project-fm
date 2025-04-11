@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFM.Pilots.Enums;
 
 namespace ProjectFM.Pilots.Interfaces
 {
@@ -23,16 +24,5 @@ namespace ProjectFM.Pilots.Interfaces
         void LevelUp();
         bool CanUse();
         void StartCooldown();
-    }
-
-    /// <summary>
-    /// 스킬 타입 열거형
-    /// </summary>
-    public enum SkillType
-    {
-        Offensive,
-        Defensive,
-        Support,
-        Special
     }
 } 

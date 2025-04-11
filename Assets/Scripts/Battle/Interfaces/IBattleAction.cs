@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ProjectFM.Mecha.Interfaces;
+using ProjectFM.Battle.Enums;
 
 namespace ProjectFM.Battle.Interfaces
 {
@@ -25,18 +25,5 @@ namespace ProjectFM.Battle.Interfaces
         bool IsValidTarget(IMechaUnit executor, IMechaUnit target, Vector2Int targetPosition);
         void Execute(IMechaUnit executor, IMechaUnit target, Vector2Int targetPosition);
         List<Vector2Int> GetValidTargetPositions(IMechaUnit executor, Vector2Int executorPosition);
-    }
-
-    /// <summary>
-    /// 액션 타입 열거형
-    /// </summary>
-    public enum ActionType
-    {
-        Movement,
-        Attack,
-        Support,
-        Special,
-        Overwatch,
-        Interact
     }
 } 

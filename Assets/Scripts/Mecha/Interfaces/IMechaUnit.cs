@@ -1,8 +1,6 @@
-using ProjectFM.Data.Interfaces;
+using ProjectFM.Mecha.Enums;
 using ProjectFM.Pilots.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 namespace ProjectFM.Mecha.Interfaces
 {
@@ -33,18 +31,5 @@ namespace ProjectFM.Mecha.Interfaces
         void CalculateStats();
         void TakeDamage(int damage, PartType targetPart);
         void CheckDestructionStatus();
-    }
-
-    /// <summary>
-    /// 스탯 타입 열거형
-    /// </summary>
-    public enum StatType
-    {
-        Attack,
-        Defense,
-        Mobility,
-        Energy,
-        HeatResistance,
-        WeaponCapacity
     }
 } 

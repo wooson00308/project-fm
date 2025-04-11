@@ -1,94 +1,68 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFM.Mecha.Enums;
 
 namespace ProjectFM.Data.Interfaces
 {
     /// <summary>
-    /// 메카닉 파트 타입을 정의하는 열거형입니다.
-    /// </summary>
-    public enum PartType
-    {
-        Body,
-        LeftArm,
-        RightArm,
-        Legs,
-        Backpack
-    }
-    
-    /// <summary>
-    /// 스탯 타입을 정의하는 열거형입니다.
-    /// </summary>
-    public enum StatType
-    {
-        Attack,
-        Defense,
-        Mobility,
-        Energy,
-        Accuracy,
-        Evasion,
-        CriticalRate
-    }
-    
-    /// <summary>
-    /// 메카닉 파트 데이터에 대한 인터페이스입니다.
-    /// ScriptableObject에서 구현될 기본 데이터 구조를 정의합니다.
+    /// 메카 파트 데이터를 정의하는 인터페이스입니다.
     /// </summary>
     public interface IMechaPartData
     {
         /// <summary>
-        /// 파트의 고유 ID
+        /// 파트 ID
         /// </summary>
-        string PartID { get; }
+        string Id { get; }
         
         /// <summary>
-        /// 파트의 이름
-        /// </summary>
-        string PartName { get; }
-        
-        /// <summary>
-        /// 파트의 유형 (몸체, 팔, 다리 등)
-        /// </summary>
-        PartType Type { get; }
-        
-        /// <summary>
-        /// 파트의 최대 내구도 기본값
-        /// </summary>
-        int BaseMaxDurability { get; }
-        
-        /// <summary>
-        /// 파트가 제공하는 스탯 수정자
-        /// </summary>
-        IDictionary<StatType, int> StatModifiers { get; }
-        
-        /// <summary>
-        /// 파트가 가진 특수 효과 배열
-        /// </summary>
-        ISpecialEffect[] SpecialEffects { get; }
-        
-        /// <summary>
-        /// 파트의 카테고리 (무기, 방어, 이동 등)
-        /// </summary>
-        string Category { get; }
-    }
-    
-    /// <summary>
-    /// 특수 효과에 대한 인터페이스입니다.
-    /// </summary>
-    public interface ISpecialEffect
-    {
-        /// <summary>
-        /// 특수 효과의 이름
+        /// 파트 이름
         /// </summary>
         string Name { get; }
         
         /// <summary>
-        /// 특수 효과의 설명
+        /// 파트 설명
         /// </summary>
         string Description { get; }
         
         /// <summary>
-        /// 효과가 적용되는 조건
+        /// 파트 타입
         /// </summary>
-        string Condition { get; }
+        PartType Type { get; }
+        
+        /// <summary>
+        /// 에너지 소모량
+        /// </summary>
+        int EnergyCost { get; }
+        
+        /// <summary>
+        /// 내구도
+        /// </summary>
+        int Durability { get; }
+        
+        /// <summary>
+        /// 최대 내구도
+        /// </summary>
+        int MaxDurability { get; }
+        
+        /// <summary>
+        /// 파트 스탯
+        /// </summary>
+        IReadOnlyDictionary<StatType, int> Stats { get; }
+        
+        /// <summary>
+        /// 특수 효과 목록
+        /// </summary>
+        ISpecialEffect[] SpecialEffects { get; }
+        
+        /// <summary>
+        /// 파트 아이콘
+        /// </summary>
+        Sprite Icon { get; }
+        
+        /// <summary>
+        /// 모델 프리팹 경로
+        /// </summary>
+        string ModelPrefabPath { get; }
     }
-} 
+}

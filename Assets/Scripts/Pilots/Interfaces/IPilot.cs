@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFM.Pilots.Enums;
 
 namespace ProjectFM.Pilots.Interfaces
 {
@@ -24,29 +25,5 @@ namespace ProjectFM.Pilots.Interfaces
         void LevelUp();
         void LearnSkill(IPilotSkill skill);
         int GetStatValue(PilotStat stat);
-    }
-
-    /// <summary>
-    /// 파일럿 클래스 열거형
-    /// </summary>
-    public enum PilotClass
-    {
-        Rookie,
-        Veteran,
-        Ace,
-        Legend
-    }
-
-    /// <summary>
-    /// 파일럿 스탯 열거형
-    /// </summary>
-    public enum PilotStat
-    {
-        Reflexes,
-        Precision,
-        Endurance,
-        Adaptation,
-        Leadership,
-        Willpower
     }
 } 

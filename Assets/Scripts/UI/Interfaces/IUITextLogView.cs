@@ -48,35 +48,4 @@ namespace ProjectFM.UI.Interfaces
         /// </summary>
         event Action<ITextLogEntry> OnLogDisplayed;
     }
-    
-    /// <summary>
-    /// 텍스트 로그 뷰 설정을 정의하는 인터페이스입니다.
-    /// </summary>
-    public interface IUITextLogViewSettings
-    {
-        /// <summary>
-        /// 최대 표시 로그 개수
-        /// </summary>
-        int MaxVisibleLogEntries { get; set; }
-        
-        /// <summary>
-        /// 로그 엔트리 자동 스크롤 여부
-        /// </summary>
-        bool AutoScroll { get; set; }
-        
-        /// <summary>
-        /// 로그 표시 속도 (초당 문자 수)
-        /// </summary>
-        float TextDisplaySpeed { get; set; }
-        
-        /// <summary>
-        /// 새 로그 항목에 애니메이션 적용 여부
-        /// </summary>
-        bool AnimateNewEntries { get; set; }
-        
-        /// <summary>
-        /// 로그 타입별 색상 설정
-        /// </summary>
-        IDictionary<LogEntryType, string> LogTypeColorCodes { get; }
-    }
 } 
