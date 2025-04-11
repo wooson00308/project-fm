@@ -3,6 +3,7 @@
 **작성일:** 2025년 4월 11일  
 **작성자:** SASHA  
 **문서 상태:** 초안 (프로토타입 단계)
+**참고 사항:** 이 문서는 에셋 관리 규칙 및 네이밍 컨벤션에 집중합니다. 폴더 구조의 기본 표준은 `project-structure.md` 문서를 참조하세요.
 
 ## 1. 개요
 
@@ -37,30 +38,9 @@ Project-FM에서는 다음과 같은 주요 에셋 유형을 사용합니다:
 
 ## 2. 폴더 구조 및 네이밍 컨벤션
 
-### 2.1 에셋 폴더 구조
+### 2.1 폴더 구조 참고
 
-```
-Assets/
-├── Scripts/                 # 모든 스크립트 파일
-├── Data/                    # ScriptableObject 데이터 에셋
-│   ├── MechParts/           # 메카닉 파츠 데이터
-│   ├── Pilots/              # 파일럿 데이터
-│   ├── BattleParameters/    # 전투 관련 파라미터
-│   └── GameSettings/        # 게임 전반 설정
-├── Prefabs/                 # 프리팹
-│   ├── UI/                  # UI 프리팹
-│   └── Debug/               # 디버깅 도구 프리팹
-├── Scenes/                  # 씬 파일
-│   ├── Prototype/           # 프로토타입 테스트 씬
-│   └── Debug/               # 디버깅 및 개발 씬
-├── UI/                      # UI 관련 에셋
-│   ├── TextStyles/          # 텍스트 스타일 및 설정
-│   ├── Sprites/             # UI 스프라이트
-│   └── Animations/          # UI 애니메이션
-├── Editor/                  # 에디터 확장 스크립트
-│   └── OdinExtensions/      # Odin Inspector 커스텀 에디터
-└── Settings/                # 프로젝트 설정 파일
-```
+기본 폴더 구조는 `project-structure.md` 문서에 정의된 표준을 따릅니다. 이 섹션에서는 에셋 유형별로 추가적인 하위 폴더 구조만 정의합니다.
 
 ### 2.2 에셋 네이밍 컨벤션
 

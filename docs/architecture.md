@@ -3,6 +3,7 @@
 **작성일:** 2025년 4월 11일  
 **작성자:** SASHA  
 **문서 상태:** 초안 (프로토타입 단계)
+**참고 사항:** 이 문서는 인터페이스 및 시스템 관계에 집중합니다. 폴더 구조는 `project-structure.md` 문서를 참조하세요.
 
 ## 1. 시스템 개요
 
@@ -68,84 +69,49 @@ public class MechaPrototype : MonoBehaviour
 
 ## 3. 핵심 시스템 구조
 
+이 섹션에서는 각 시스템의 인터페이스 구조와 컴포넌트 관계를 설명합니다. 실제 파일 및 폴더 구조는 `project-structure.md` 문서의 표준을 따릅니다.
+
 ### 3.1 메카닉 시스템
-```
-MechaSystem/
-├── Interfaces/
-│   ├── IMechaUnit.cs         # 메카닉 유닛 인터페이스
-│   ├── IMechaPart.cs         # 메카닉 파트 인터페이스
-│   └── IWeaponSystem.cs      # 무기 시스템 인터페이스
-├── Abstract/
-│   ├── MechaUnitBase.cs      # 메카닉 유닛 추상 클래스
-│   ├── MechaPartBase.cs      # 메카닉 파트 추상 클래스
-│   └── WeaponSystemBase.cs   # 무기 시스템 추상 클래스
-├── Parts/
-│   ├── PartTypes.cs          # 파트 타입 열거형 정의
-│   └── PartInterfaces/       # 각 파트 타입별 인터페이스
-│       ├── IBodyPart.cs      # 보디 파트 인터페이스
-│       ├── IArmPart.cs       # 암즈 파트 인터페이스
-│       ├── ILegPart.cs       # 레그 파트 인터페이스
-│       └── IBackpackPart.cs  # 백팩 파트 인터페이스
-└── Combat/
-    ├── IDamageSystem.cs            # 데미지 시스템 인터페이스
-    ├── IPartDestructionSystem.cs   # 파트 파괴 시스템 인터페이스
-    └── IStatusEffectSystem.cs      # 상태 효과 시스템 인터페이스
-```
+메카닉 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
+
+- **IMechaUnit**: 메카닉 유닛의 기본 인터페이스
+- **IMechaPart**: 메카닉 파트의 기본 인터페이스
+- **IWeaponSystem**: 무기 시스템 인터페이스
+- **IBodyPart**, **IArmPart**, **ILegPart**, **IBackpackPart**: 각 파트 타입별 인터페이스
+- **IDamageSystem**, **IPartDestructionSystem**, **IStatusEffectSystem**: 전투 관련 인터페이스
 
 ### 3.2 파일럿 시스템
-```
-PilotSystem/
-├── Interfaces/
-│   ├── IPilot.cs                   # 파일럿 인터페이스
-│   ├── IPilotSkill.cs              # 파일럿 스킬 인터페이스
-│   └── IPilotProgressionSystem.cs  # 파일럿 성장 시스템 인터페이스
-├── Abstract/
-│   ├── PilotBase.cs                # 파일럿 추상 클래스
-│   └── PilotSkillBase.cs           # 파일럿 스킬 추상 클래스
-└── Data/
-    ├── PilotStats.cs               # 파일럿 스탯 열거형
-    └── IPilotDatabase.cs           # 파일럿 데이터베이스 인터페이스
-```
+파일럿 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
+
+- **IPilot**: 파일럿 인터페이스
+- **IPilotSkill**: 파일럿 스킬 인터페이스
+- **IPilotProgressionSystem**: 파일럿 성장 시스템 인터페이스
+- **IPilotDatabase**: 파일럿 데이터베이스 인터페이스
 
 ### 3.3 전투 시스템
-```
-CombatSystem/
-├── Interfaces/
-│   ├── ITurnManager.cs             # 턴 관리 인터페이스
-│   ├── IBattleGrid.cs              # 전투 그리드 인터페이스
-│   ├── IMovementSystem.cs          # 이동 시스템 인터페이스
-│   ├── IActionSystem.cs            # 행동 시스템 인터페이스
-│   └── IAIController.cs            # AI 제어 인터페이스
-├── Abstract/
-│   ├── TurnManagerBase.cs          # 턴 관리 추상 클래스
-│   └── BattleActionBase.cs         # 전투 액션 추상 클래스
-└── Environment/
-    └── IEnvironmentInteraction.cs  # 환경 상호작용 인터페이스
-```
+전투 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
+
+- **ITurnManager**: 턴 관리 인터페이스
+- **IBattleGrid**: 전투 그리드 인터페이스
+- **IMovementSystem**: 이동 시스템 인터페이스
+- **IActionSystem**: 행동 시스템 인터페이스
+- **IAIController**: AI 제어 인터페이스
+- **IEnvironmentInteraction**: 환경 상호작용 인터페이스
 
 ### 3.4 UI 시스템
-```
-UISystem/
-├── Interfaces/
-│   ├── IUIPanel.cs                  # UI 패널 인터페이스
-│   ├── IUIManager.cs                # UI 매니저 인터페이스
-│   └── IUIElement.cs                # UI 요소 인터페이스
-└── Abstract/
-    └── UIPanelBase.cs               # UI 패널 추상 클래스
-```
+UI 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
+
+- **IUIPanel**: UI 패널 인터페이스
+- **IUIManager**: UI 매니저 인터페이스
+- **IUIElement**: UI 요소 인터페이스
 
 ### 3.5 데이터 관리
-```
-DataManagement/
-├── Interfaces/
-│   ├── ISaveSystem.cs               # 저장 시스템 인터페이스
-│   ├── IDataRepository.cs           # 데이터 저장소 인터페이스
-│   └── IAssetManager.cs             # 에셋 관리 인터페이스
-└── ScriptableObjects/
-    ├── IMechaPartData.cs            # 메카닉 파트 데이터 인터페이스
-    ├── IPilotData.cs                # 파일럿 데이터 인터페이스
-    └── IWeaponData.cs               # 무기 데이터 인터페이스
-```
+데이터 관리 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
+
+- **ISaveSystem**: 저장 시스템 인터페이스
+- **IDataRepository**: 데이터 저장소 인터페이스
+- **IAssetManager**: 에셋 관리 인터페이스
+- **IMechaPartData**, **IPilotData**, **IWeaponData**: 스크립터블 오브젝트 데이터 인터페이스
 
 ## 4. 데이터 흐름
 
