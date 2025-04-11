@@ -31,100 +31,126 @@ Odin Inspector를 활용하여 프로토타이핑 과정을 가속화합니다:
 
 ### 3.1 최상위 폴더 구조
 
-```
-Assets/
-├── Art/                     # 모든 시각적 에셋
-├── Audio/                   # 오디오 에셋
-├── Packages/                # 써드파티 패키지 (Odin Inspector 포함)
-├── Prefabs/                 # 프리팹 에셋
-├── Prototypes/              # 프로토타입 기능 및 테스트
-│   ├── MechaSystem/         # 메카닉 시스템 프로토타입
-│   ├── BattleSystem/        # 전투 시스템 프로토타입
-│   └── UITests/             # UI 테스트
-├── Resources/               # 런타임에 로드되는 리소스
-├── Scenes/                  # 씬 파일
-├── ScriptableObjects/       # 게임 데이터 ScriptableObjects
-├── Scripts/                 # C# 스크립트
-├── Settings/                # 프로젝트 설정 파일
-└── ThirdParty/              # 기타 써드파티 플러그인 및 에셋
+```mermaid
+graph TD
+    Assets["Assets/"] --- Art["Art/<br/>모든 시각적 에셋"]
+    Assets --- Audio["Audio/<br/>오디오 에셋"]
+    Assets --- Packages["Packages/<br/>써드파티 패키지<br/>(Odin Inspector 포함)"]
+    Assets --- Prefabs["Prefabs/<br/>프리팹 에셋"]
+    Assets --- Prototypes["Prototypes/<br/>프로토타입 기능 및 테스트"]
+    Assets --- Resources["Resources/<br/>런타임에 로드되는 리소스"]
+    Assets --- Scenes["Scenes/<br/>씬 파일"]
+    Assets --- ScriptableObjects["ScriptableObjects/<br/>게임 데이터 ScriptableObjects"]
+    Assets --- Scripts["Scripts/<br/>C# 스크립트"]
+    Assets --- Settings["Settings/<br/>프로젝트 설정 파일"]
+    Assets --- ThirdParty["ThirdParty/<br/>기타 써드파티 플러그인 및 에셋"]
+    
+    Prototypes --- MechaSystem["MechaSystem/<br/>메카닉 시스템 프로토타입"]
+    Prototypes --- BattleSystem["BattleSystem/<br/>전투 시스템 프로토타입"]
+    Prototypes --- UITests["UITests/<br/>UI 테스트"]
 ```
 
 ### 3.2 Scripts 폴더 구조
 
 인터페이스와 추상화 중심의 실용적인 구조:
 
-```
-Scripts/
-├── Core/                       # 핵심 시스템 및 매니저
-│   ├── Interfaces/             # 핵심 인터페이스
-│   │   ├── IManager.cs         # 매니저 인터페이스
-│   │   └── IGameState.cs       # 게임 상태 인터페이스
-│   └── Abstract/               # 핵심 추상 클래스
-│       └── ManagerBase.cs      # 매니저 추상 클래스
-├── Mecha/                      # 메카닉 관련 스크립트
-│   ├── Interfaces/             # 메카닉 인터페이스
-│   │   ├── IMechaUnit.cs       # 메카닉 유닛 인터페이스
-│   │   └── IMechaPart.cs       # 메카닉 파트 인터페이스
-│   ├── Abstract/               # 메카닉 추상 클래스
-│   │   ├── MechaUnitBase.cs    # 메카닉 유닛 추상 클래스
-│   │   └── MechaPartBase.cs    # 메카닉 파트 추상 클래스
-│   ├── Parts/                  # 파트 인터페이스 및 타입
-│   │   ├── IBodyPart.cs        # 보디 파트 인터페이스
-│   │   ├── IArmPart.cs         # 암즈 파트 인터페이스
-│   │   └── ILegPart.cs         # 레그 파트 인터페이스
-│   └── Customization/          # 커스터마이징 시스템 인터페이스
-├── Battle/                     # 전투 시스템 스크립트
-│   ├── Interfaces/             # 전투 인터페이스
-│   │   ├── ITurnManager.cs     # 턴 관리 인터페이스
-│   │   ├── IBattleGrid.cs      # 전투 그리드 인터페이스
-│   │   └── IBattleAction.cs    # 전투 액션 인터페이스
-│   ├── Abstract/               # 전투 추상 클래스
-│   │   └── BattleActionBase.cs # 전투 액션 추상 클래스
-│   ├── Actions/                # 전투 액션 인터페이스
-│   └── Grid/                   # 전투 그리드 인터페이스
-├── Pilots/                     # 파일럿 관련 스크립트
-│   ├── Interfaces/             # 파일럿 인터페이스
-│   │   ├── IPilot.cs           # 파일럿 인터페이스
-│   │   └── IPilotSkill.cs      # 파일럿 스킬 인터페이스
-│   └── Abstract/               # 파일럿 추상 클래스
-│       └── PilotBase.cs        # 파일럿 추상 클래스
-├── UI/                         # UI 관련 스크립트
-│   ├── Interfaces/             # UI 인터페이스
-│   │   ├── IUIPanel.cs         # UI 패널 인터페이스
-│   │   └── IUIElement.cs       # UI 요소 인터페이스
-│   └── Abstract/               # UI 추상 클래스
-│       └── UIPanelBase.cs      # UI 패널 추상 클래스
-├── Utils/                      # 유틸리티 스크립트
-│   ├── Interfaces/             # 유틸리티 인터페이스
-│   │   └── IPoolable.cs        # 오브젝트 풀링 인터페이스
-│   └── Extensions/             # 확장 메서드
-└── Editor/                     # 에디터 확장 스크립트
-    └── OdinExtensions/         # Odin Inspector 확장
+```mermaid
+graph TD
+    Scripts["Scripts/"] --- Core["Core/<br/>핵심 시스템 및 매니저"]
+    Scripts --- Mecha["Mecha/<br/>메카닉 관련 스크립트"]
+    Scripts --- Battle["Battle/<br/>전투 시스템 스크립트"]
+    Scripts --- Pilots["Pilots/<br/>파일럿 관련 스크립트"]
+    Scripts --- UI["UI/<br/>UI 관련 스크립트"]
+    Scripts --- Utils["Utils/<br/>유틸리티 스크립트"]
+    Scripts --- Editor["Editor/<br/>에디터 확장 스크립트"]
+    
+    Core --- CoreInterfaces["Interfaces/<br/>핵심 인터페이스"]
+    Core --- CoreAbstract["Abstract/<br/>핵심 추상 클래스"]
+    
+    CoreInterfaces --- IManager["IManager.cs"]
+    CoreInterfaces --- IGameState["IGameState.cs"]
+    
+    CoreAbstract --- ManagerBase["ManagerBase.cs"]
+    
+    Mecha --- MechaInterfaces["Interfaces/<br/>메카닉 인터페이스"]
+    Mecha --- MechaAbstract["Abstract/<br/>메카닉 추상 클래스"]
+    Mecha --- Parts["Parts/<br/>파트 인터페이스 및 타입"]
+    Mecha --- Customization["Customization/<br/>커스터마이징 시스템 인터페이스"]
+    
+    MechaInterfaces --- IMechaUnit["IMechaUnit.cs"]
+    MechaInterfaces --- IMechaPart["IMechaPart.cs"]
+    
+    MechaAbstract --- MechaUnitBase["MechaUnitBase.cs"]
+    MechaAbstract --- MechaPartBase["MechaPartBase.cs"]
+    
+    Parts --- IBodyPart["IBodyPart.cs"]
+    Parts --- IArmPart["IArmPart.cs"]
+    Parts --- ILegPart["ILegPart.cs"]
+    
+    Battle --- BattleInterfaces["Interfaces/<br/>전투 인터페이스"]
+    Battle --- BattleAbstract["Abstract/<br/>전투 추상 클래스"]
+    Battle --- Actions["Actions/<br/>전투 액션 인터페이스"]
+    Battle --- Grid["Grid/<br/>전투 그리드 인터페이스"]
+    
+    BattleInterfaces --- ITurnManager["ITurnManager.cs"]
+    BattleInterfaces --- IBattleGrid["IBattleGrid.cs"]
+    BattleInterfaces --- IBattleAction["IBattleAction.cs"]
+    
+    BattleAbstract --- BattleActionBase["BattleActionBase.cs"]
+    
+    Pilots --- PilotInterfaces["Interfaces/<br/>파일럿 인터페이스"]
+    Pilots --- PilotAbstract["Abstract/<br/>파일럿 추상 클래스"]
+    
+    PilotInterfaces --- IPilot["IPilot.cs"]
+    PilotInterfaces --- IPilotSkill["IPilotSkill.cs"]
+    
+    PilotAbstract --- PilotBase["PilotBase.cs"]
+    
+    UI --- UIInterfaces["Interfaces/<br/>UI 인터페이스"]
+    UI --- UIAbstract["Abstract/<br/>UI 추상 클래스"]
+    
+    UIInterfaces --- IUIPanel["IUIPanel.cs"]
+    UIInterfaces --- IUIElement["IUIElement.cs"]
+    
+    UIAbstract --- UIPanelBase["UIPanelBase.cs"]
+    
+    Utils --- UtilsInterfaces["Interfaces/<br/>유틸리티 인터페이스"]
+    Utils --- Extensions["Extensions/<br/>확장 메서드"]
+    
+    UtilsInterfaces --- IPoolable["IPoolable.cs"]
+    
+    Editor --- OdinExtensions["OdinExtensions/<br/>Odin Inspector 확장"]
 ```
 
 ### 3.3 Prototypes 폴더 구조
 
 프로토타입 테스트를 위한 구조:
 
-```
-Prototypes/
-├── MechaSystem/                # 메카닉 시스템 프로토타입
-│   ├── Scenes/                 # 테스트 씬
-│   ├── Scripts/                # 프로토타입 스크립트
-│   │   ├── Interfaces/         # 프로토타입 인터페이스
-│   │   └── TestImplementations/# 테스트용 구현체
-│   └── Prefabs/                # 테스트용 프리팹
-├── BattleSystem/               # 전투 시스템 프로토타입
-│   ├── Scenes/
-│   ├── Scripts/
-│   │   ├── Interfaces/         # 프로토타입 인터페이스
-│   │   └── TestImplementations/# 테스트용 구현체
-│   └── Prefabs/
-└── UITests/                    # UI 테스트
-    ├── Scenes/
-    └── Scripts/
-        ├── Interfaces/         # UI 테스트 인터페이스
-        └── TestImplementations/# 테스트용 UI 구현체
+```mermaid
+graph TD
+    Prototypes["Prototypes/"] --- MechaSystem["MechaSystem/<br/>메카닉 시스템 프로토타입"]
+    Prototypes --- BattleSystem["BattleSystem/<br/>전투 시스템 프로토타입"]
+    Prototypes --- UITests["UITests/<br/>UI 테스트"]
+    
+    MechaSystem --- MechaScenes["Scenes/<br/>테스트 씬"]
+    MechaSystem --- MechaScripts["Scripts/<br/>프로토타입 스크립트"]
+    MechaSystem --- MechaPrefabs["Prefabs/<br/>테스트용 프리팹"]
+    
+    MechaScripts --- MechaInterfaces["Interfaces/<br/>프로토타입 인터페이스"]
+    MechaScripts --- MechaImplementations["TestImplementations/<br/>테스트용 구현체"]
+    
+    BattleSystem --- BattleScenes["Scenes/"]
+    BattleSystem --- BattleScripts["Scripts/"]
+    BattleSystem --- BattlePrefabs["Prefabs/"]
+    
+    BattleScripts --- BattleInterfaces["Interfaces/<br/>프로토타입 인터페이스"]
+    BattleScripts --- BattleImplementations["TestImplementations/<br/>테스트용 구현체"]
+    
+    UITests --- UIScenes["Scenes/"]
+    UITests --- UIScripts["Scripts/"]
+    
+    UIScripts --- UIInterfaces["Interfaces/<br/>UI 테스트 인터페이스"]
+    UIScripts --- UIImplementations["TestImplementations/<br/>테스트용 UI 구현체"]
 ```
 
 ## 4. Odin Inspector 활용 가이드
@@ -391,17 +417,17 @@ namespace ProjectFM.Mecha.Interfaces
 
 ## 부록: 인터페이스 관계 다이어그램
 
-```
-[IMechaUnit] ◄── [IMechaPart]
-    │                 ▲
-    │                 │
-    │            ┌────┴────┬────────┬────────┐
-    │            │         │        │        │
-    │     [IBodyPart] [IArmPart] [ILegPart] [IBackpackPart]
-    │
-    ├──► [IPilot] ◄── [IPilotSkill]
-    │
-    └──► [IWeaponSystem] ◄── [IWeapon]
+```mermaid
+graph TD
+    IMechaUnit --- IMechaPart
+    IMechaUnit --- IPilot
+    IMechaUnit --- IWeaponSystem
+    IMechaPart --- IBodyPart
+    IMechaPart --- IArmPart
+    IMechaPart --- ILegPart
+    IMechaPart --- IBackpackPart
+    IPilot --- IPilotSkill
+    IWeaponSystem --- IWeapon
 ```
 
 **참고**: 이 문서는 프로토타입 단계의 지침이며, 개발 진행에 따라 업데이트될 수 있습니다.

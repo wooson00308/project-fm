@@ -79,25 +79,29 @@ SO_[카테고리]_[이름]_[변형]
 
 프로토타입 단계에서는 ScriptableObject를 다음과 같이 구성합니다:
 
-```
-Data/
-├── MechParts/
-│   ├── Weapons/             # 무기 파츠
-│   ├── Armor/               # 방어 파츠
-│   ├── Mobility/            # 이동 파츠
-│   ├── Special/             # 특수 파츠
-│   └── DefaultSets/         # 기본 파츠 세트
-├── Pilots/
-│   ├── PlayerPilots/        # 플레이어 파일럿
-│   └── EnemyPilots/         # 적 파일럿
-├── BattleParameters/
-│   ├── CombatRules/         # 전투 규칙
-│   ├── DifficultySettings/  # 난이도 설정
-│   └── BalanceProfiles/     # 밸런스 프로필
-└── GameSettings/
-    ├── Graphics/            # 그래픽 설정
-    ├── Sound/               # 사운드 설정
-    └── Gameplay/            # 게임플레이 설정
+```mermaid
+graph TD
+    Data["Data/"] --- MechParts["MechParts/"]
+    Data --- Pilots["Pilots/"]
+    Data --- BattleParameters["BattleParameters/"]
+    Data --- GameSettings["GameSettings/"]
+    
+    MechParts --- Weapons["Weapons/<br/>무기 파츠"]
+    MechParts --- Armor["Armor/<br/>방어 파츠"]
+    MechParts --- Mobility["Mobility/<br/>이동 파츠"]
+    MechParts --- Special["Special/<br/>특수 파츠"]
+    MechParts --- DefaultSets["DefaultSets/<br/>기본 파츠 세트"]
+    
+    Pilots --- PlayerPilots["PlayerPilots/<br/>플레이어 파일럿"]
+    Pilots --- EnemyPilots["EnemyPilots/<br/>적 파일럿"]
+    
+    BattleParameters --- CombatRules["CombatRules/<br/>전투 규칙"]
+    BattleParameters --- DifficultySettings["DifficultySettings/<br/>난이도 설정"]
+    BattleParameters --- BalanceProfiles["BalanceProfiles/<br/>밸런스 프로필"]
+    
+    GameSettings --- Graphics["Graphics/<br/>그래픽 설정"]
+    GameSettings --- Sound["Sound/<br/>사운드 설정"]
+    GameSettings --- Gameplay["Gameplay/<br/>게임플레이 설정"]
 ```
 
 ### 3.2 ScriptableObject 생성 메뉴
@@ -166,25 +170,30 @@ public class MechPartRepository : IDataAssetRepository<MechPartData>
 
 프로토타입 단계에서는 최소한의 UI 요소를 사용합니다:
 
-```
-UI/
-├── Prefabs/
-│   ├── BattleLog/           # 전투 로그 UI
-│   │   ├── PRF_LogPanel.prefab
-│   │   ├── PRF_LogEntry.prefab
-│   │   └── PRF_LogFilterButton.prefab
-│   ├── StatusDisplay/       # 상태 표시 UI
-│   │   ├── PRF_MechStatus.prefab
-│   │   ├── PRF_PilotStatus.prefab
-│   │   └── PRF_PartStatus.prefab
-│   └── CommandInput/        # 명령 입력 UI
-│       ├── PRF_CommandPanel.prefab
-│       ├── PRF_ActionButton.prefab
-│       └── PRF_TargetSelector.prefab
-└── Sprites/
-    ├── Backgrounds/         # 배경 스프라이트
-    ├── Buttons/             # 버튼 스프라이트
-    └── Icons/               # 아이콘 스프라이트
+```mermaid
+graph TD
+    UI["UI/"] --- Prefabs["Prefabs/"]
+    UI --- Sprites["Sprites/"]
+    
+    Prefabs --- BattleLog["BattleLog/<br/>전투 로그 UI"]
+    Prefabs --- StatusDisplay["StatusDisplay/<br/>상태 표시 UI"]
+    Prefabs --- CommandInput["CommandInput/<br/>명령 입력 UI"]
+    
+    BattleLog --- PRF_LogPanel["PRF_LogPanel.prefab"]
+    BattleLog --- PRF_LogEntry["PRF_LogEntry.prefab"]
+    BattleLog --- PRF_LogFilterButton["PRF_LogFilterButton.prefab"]
+    
+    StatusDisplay --- PRF_MechStatus["PRF_MechStatus.prefab"]
+    StatusDisplay --- PRF_PilotStatus["PRF_PilotStatus.prefab"]
+    StatusDisplay --- PRF_PartStatus["PRF_PartStatus.prefab"]
+    
+    CommandInput --- PRF_CommandPanel["PRF_CommandPanel.prefab"]
+    CommandInput --- PRF_ActionButton["PRF_ActionButton.prefab"]
+    CommandInput --- PRF_TargetSelector["PRF_TargetSelector.prefab"]
+    
+    Sprites --- Backgrounds["Backgrounds/<br/>배경 스프라이트"]
+    Sprites --- Buttons["Buttons/<br/>버튼 스프라이트"]
+    Sprites --- Icons["Icons/<br/>아이콘 스프라이트"]
 ```
 
 ### 4.2 텍스트 스타일 설정

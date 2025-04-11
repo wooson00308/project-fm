@@ -116,18 +116,34 @@ UI 시스템은 다음과 같은 주요 인터페이스로 구성됩니다:
 ## 4. 데이터 흐름
 
 ### 4.1 메카닉 커스터마이징 흐름
-```
-사용자 입력 → IUIPanel → IMechaUnit → IMechaPart (교체/수정) → 데이터 업데이트 → UI 갱신
+```mermaid
+graph LR
+    UserInput["사용자 입력"] --> UIPanel["IUIPanel"]
+    UIPanel --> MechaUnit["IMechaUnit"]
+    MechaUnit --> MechaPart["IMechaPart<br/>(교체/수정)"]
+    MechaPart --> DataUpdate["데이터 업데이트"]
+    DataUpdate --> UIUpdate["UI 갱신"]
 ```
 
 ### 4.2 전투 흐름
-```
-ITurnManager → 현재 유닛 결정 → 사용자/AI 입력 → IActionSystem → 액션 실행 → IDamageSystem → 결과 처리 → ITurnManager (다음 턴)
+```mermaid
+graph LR
+    TurnManager["ITurnManager"] --> UnitDecision["현재 유닛 결정"]
+    UnitDecision --> Input["사용자/AI 입력"]
+    Input --> ActionSystem["IActionSystem"]
+    ActionSystem --> ExecuteAction["액션 실행"]
+    ExecuteAction --> DamageSystem["IDamageSystem"]
+    DamageSystem --> ResultProcess["결과 처리"]
+    ResultProcess --> NextTurn["ITurnManager<br/>(다음 턴)"]
 ```
 
 ### 4.3 파일럿 관리 흐름
-```
-사용자 입력 → IUIPanel → IPilotSystem → 파일럿 데이터 업데이트 → UI 갱신
+```mermaid
+graph LR
+    UserInput["사용자 입력"] --> UIPanel["IUIPanel"]
+    UIPanel --> PilotSystem["IPilotSystem"]
+    PilotSystem --> UpdateData["파일럿 데이터 업데이트"]
+    UpdateData --> UIUpdate["UI 갱신"]
 ```
 
 ## 5. 인터페이스 및 추상 클래스 설계
@@ -248,15 +264,15 @@ public interface IPilot
 
 ## 부록: 인터페이스 의존성 다이어그램
 
-```
-[IMechaUnit] ◄── [IMechaPart]
-    │                 ▲
-    │                 │
-    │            ┌────┴────┬────────┬────────┐
-    │            │         │        │        │
-    │     [IBodyPart] [IArmPart] [ILegPart] [IBackpackPart]
-    │
-    ├──► [IPilot] ◄── [IPilotSkill]
-    │
-    └──► [IWeaponSystem] ◄── [IWeapon]
+```mermaid
+graph TD
+    IMechaUnit --- IMechaPart
+    IMechaUnit --- IPilot
+    IMechaUnit --- IWeaponSystem
+    IMechaPart --- IBodyPart
+    IMechaPart --- IArmPart
+    IMechaPart --- ILegPart
+    IMechaPart --- IBackpackPart
+    IPilot --- IPilotSkill
+    IWeaponSystem --- IWeapon
 ```

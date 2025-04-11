@@ -18,14 +18,15 @@
 
 ### 1.2 데이터 구조 개요
 
-```
-MechaDatabase ─→ MechaUnit ─→ MechaParts
-      ↑               ↑
-      │               │
-PilotDatabase ────→ Pilot
-      ↑               ↑
-      │               │
- SaveSystem ────→ BattleSystem ─→ TextLogSystem
+```mermaid
+graph TD
+    MechaDatabase --> MechaUnit
+    MechaUnit --> MechaParts
+    PilotDatabase --> MechaUnit
+    PilotDatabase --> Pilot
+    SaveSystem --> PilotDatabase
+    SaveSystem --> BattleSystem
+    BattleSystem --> TextLogSystem
 ```
 
 ## 2. 주요 데이터 흐름
@@ -43,14 +44,17 @@ PilotDatabase ────→ Pilot
 
 #### 2.1.1 인터페이스 기반 데이터 흐름 다이어그램
 
-```
-IUserInputHandler → IUIController → IMechaManager
-                                      ↓
-     ┌─────────────────────────────────────────────┐
-     │                                             │
-IMechaPartRepository → IMechaUnit → IStatCalculator
-     │                     ↓             ↓
-IMechaPartData        IUIDataProvider → IUIView
+```mermaid
+graph LR
+    IUserInputHandler --> IUIController
+    IUIController --> IMechaManager
+    IMechaManager --> IMechaPartRepository
+    IMechaManager --> IMechaUnit
+    IMechaManager --> IStatCalculator
+    IMechaPartRepository --> IMechaPartData
+    IMechaUnit --> IUIDataProvider
+    IStatCalculator --> IUIDataProvider
+    IUIDataProvider --> IUIView
 ```
 
 ### 2.2 텍스트 기반 전투 시스템 데이터 흐름
@@ -67,24 +71,26 @@ IMechaPartData        IUIDataProvider → IUIView
 
 #### 2.2.1 전투 상태 전이 다이어그램
 
-```
-[전투 시작] → [초기화 단계]
-      ↓
-[턴 시작] ← ─────────┐
-      ↓              │
-[액터 선택] → [입력 대기]
-      ↓              │
-[액션 선택] → [타겟 선택]
-      ↓              │
-[액션 실행] → [데미지 계산]
-      ↓              │
-[효과 적용] → [파츠 상태 체크]
-      ↓              │
-[로그 생성] → [UI 업데이트]
-      ↓              │
-[턴 종료] → ─────────┘
-      ↓
-[전투 결과 검사] → [전투 종료/계속]
+```mermaid
+stateDiagram-v2
+    [*] --> 전투시작
+    전투시작 --> 초기화단계
+    초기화단계 --> 턴시작
+    턴시작 --> 액터선택
+    액터선택 --> 입력대기
+    입력대기 --> 액션선택
+    액션선택 --> 타겟선택
+    타겟선택 --> 액션실행
+    액션실행 --> 데미지계산
+    데미지계산 --> 효과적용
+    효과적용 --> 파츠상태체크
+    파츠상태체크 --> 로그생성
+    로그생성 --> UI업데이트
+    UI업데이트 --> 턴종료
+    턴종료 --> 전투결과검사
+    전투결과검사 --> 턴시작: 전투계속
+    전투결과검사 --> 전투종료: 결과확정
+    전투종료 --> [*]
 ```
 
 ## 3. ScriptableObject 기반 데이터 관리
@@ -343,20 +349,15 @@ var mechaRepository = ServiceLocator.GetService<IMechaPartRepository>();
 
 ### 6.2 메카닉 및 파일럿 인스턴스 데이터 플로우
 
-```
-ScriptableObject (메카닉 파트, 파일럿 데이터)
-       ↓
-IRepository (파트 및 파일럿 저장소)
-       ↓
-Factory (IMechaUnitFactory, IPilotFactory)
-       ↓
-런타임 인스턴스 (IMechaUnit, IPilot)
-       ↓
-IBattleSystem (전투 시스템)
-       ↓
-ITextLogGenerator (텍스트 로그 생성)
-       ↓
-IUIView (UI 표시)
+```mermaid
+graph TD
+    ScriptableObject["ScriptableObject<br/>(메카닉 파트, 파일럿 데이터)"] --> Repository
+    Repository["IRepository<br/>(파트 및 파일럿 저장소)"] --> Factory
+    Factory["Factory<br/>(IMechaUnitFactory, IPilotFactory)"] --> RuntimeInstances
+    RuntimeInstances["런타임 인스턴스<br/>(IMechaUnit, IPilot)"] --> BattleSystem
+    BattleSystem["IBattleSystem<br/>(전투 시스템)"] --> LogGenerator
+    LogGenerator["ITextLogGenerator<br/>(텍스트 로그 생성)"] --> UIView
+    UIView["IUIView<br/>(UI 표시)"]
 ```
 
 ## 7. 프로토타입 개발 우선순위
