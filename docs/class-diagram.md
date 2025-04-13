@@ -98,7 +98,7 @@ classDiagram
         +UnitName
         +Level
         +IsDestroyed
-        +Body, Arms, Legs
+        +Head, Body, Arms, Legs
         +CurrentPilot
         +Initialize()
         +EquipPart()
@@ -361,6 +361,11 @@ classDiagram
     IUIManager --> IBattleLogger : 참조
     IMechaUnit --> IMechaPart : 소유
     IMechaUnit --> IPilot : 소유
+    IMechaPart --> IHeadPart : 확장
+    IMechaPart --> IBodyPart : 확장
+    IMechaPart --> IArmPart : 확장
+    IMechaPart --> ILegPart : 확장
+    IMechaPart --> IBackpackPart : 확장
     DataRepository --> IMechaPartData : 저장
     DataRepository --> IPilotData : 저장
     DataRepository --> IWeaponData : 저장
@@ -386,6 +391,10 @@ classDiagram
     }
     
     class IMechaPart {
+        -전략적 생략
+    }
+    
+    class IHeadPart {
         -전략적 생략
     }
     

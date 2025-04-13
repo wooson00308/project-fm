@@ -77,7 +77,7 @@ public class MechaPrototype : MonoBehaviour
 - **IMechaUnit**: 메카닉 유닛의 기본 인터페이스
 - **IMechaPart**: 메카닉 파트의 기본 인터페이스
 - **IWeaponSystem**: 무기 시스템 인터페이스
-- **IBodyPart**, **IArmPart**, **ILegPart**, **IBackpackPart**: 각 파트 타입별 인터페이스
+- **IHeadPart**, **IBodyPart**, **IArmPart**, **ILegPart**, **IBackpackPart**: 각 파트 타입별 인터페이스
 - **IDamageSystem**, **IPartDestructionSystem**, **IStatusEffectSystem**: 전투 관련 인터페이스
 
 ### 3.2 파일럿 시스템
@@ -161,6 +161,7 @@ public interface IMechaUnit
     bool IsDestroyed { get; }
     
     // 파트 참조
+    IMechaPart Head { get; }
     IMechaPart Body { get; }
     IMechaPart LeftArm { get; }
     IMechaPart RightArm { get; }
@@ -269,6 +270,7 @@ graph TD
     IMechaUnit --- IMechaPart
     IMechaUnit --- IPilot
     IMechaUnit --- IWeaponSystem
+    IMechaPart --- IHeadPart
     IMechaPart --- IBodyPart
     IMechaPart --- IArmPart
     IMechaPart --- ILegPart

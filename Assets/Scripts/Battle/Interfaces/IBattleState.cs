@@ -6,31 +6,6 @@ using ProjectFM.Battle.Enums;
 namespace ProjectFM.Battle.Interfaces
 {
     /// <summary>
-    /// 전투 단계를 정의하는 열거형입니다.
-    /// </summary>
-    public enum BattlePhase
-    {
-        Initialization,
-        TurnStart,
-        UnitSelection,
-        ActionSelection,
-        ActionExecution,
-        TurnEnd,
-        BattleEnd
-    }
-    
-    /// <summary>
-    /// 전투 결과를 정의하는 열거형입니다.
-    /// </summary>
-    public enum BattleResult
-    {
-        InProgress,
-        PlayerVictory,
-        PlayerDefeat,
-        Draw
-    }
-    
-    /// <summary>
     /// 전투 상태를 관리하는 인터페이스입니다.
     /// 현재 전투 진행 상황과 관련된 정보를 제공합니다.
     /// </summary>

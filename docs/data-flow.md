@@ -388,6 +388,7 @@ graph TD
 // 파트 타입 열거형
 public enum PartType
 {
+    Head,
     Body,
     LeftArm,
     RightArm,

@@ -7,6 +7,7 @@ namespace ProjectFM.Mecha.Enums
     /// </summary>
     public enum PartType
     {
+        Head,
         Body,
         LeftArm,
         RightArm,

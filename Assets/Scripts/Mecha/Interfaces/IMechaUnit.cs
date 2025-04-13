@@ -15,6 +15,7 @@ namespace ProjectFM.Mecha.Interfaces
         bool IsDestroyed { get; }
         
         // 파트 참조
+        IMechaPart Head { get; }
         IMechaPart Body { get; }
         IMechaPart LeftArm { get; }
         IMechaPart RightArm { get; }

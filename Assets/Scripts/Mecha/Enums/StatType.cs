@@ -12,6 +12,8 @@ namespace ProjectFM.Mecha.Enums
         Defense,
         Mobility,
         Energy,
-        Accuracy
+        Accuracy,
+        Evasion,
+        CriticalRate
     }
 } 
